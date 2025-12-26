@@ -1,156 +1,15 @@
 import React, { useState, useMemo } from 'react';
+import formulasData from '../../data/formulas.json'; // Import dữ liệu JSON
+import { formulaLogic } from '../../logic/formulaLogic'; // Import logic tính toán
 
-// --- CƠ SỞ DỮ LIỆU CÔNG THỨC ---
-// Mỗi công thức bao gồm: id, môn, lớp, tiêu đề, biểu thức hiển thị, 
-// danh sách biến đầu vào (inputs), và hàm tính toán (logic).
-const FORMULAS = [
-  // --- TOÁN HỌC ---
-  {
-    id: 'm6_rect_area',
-    subject: 'math',
-    grade: 6,
-    title: 'Diện tích hình chữ nhật',
-    expression: 'S = a × b',
-    description: 'a: chiều dài, b: chiều rộng',
-    inputs: [
-      { name: 'a', label: 'Chiều dài (a)' },
-      { name: 'b', label: 'Chiều rộng (b)' }
-    ],
-    logic: (vals) => vals.a * vals.b
-  },
-  {
-    id: 'm6_rect_peri',
-    subject: 'math',
-    grade: 6,
-    title: 'Chu vi hình chữ nhật',
-    expression: 'P = (a + b) × 2',
-    description: 'a: chiều dài, b: chiều rộng',
-    inputs: [
-      { name: 'a', label: 'Chiều dài (a)' },
-      { name: 'b', label: 'Chiều rộng (b)' }
-    ],
-    logic: (vals) => (vals.a + vals.b) * 2
-  },
-  {
-    id: 'm7_power',
-    subject: 'math',
-    grade: 7,
-    title: 'Lũy thừa',
-    expression: 'aⁿ',
-    description: 'Tính a mũ n',
-    inputs: [
-      { name: 'a', label: 'Cơ số (a)' },
-      { name: 'n', label: 'Số mũ (n)' }
-    ],
-    logic: (vals) => Math.pow(vals.a, vals.n)
-  },
-  {
-    id: 'm8_pythagoras',
-    subject: 'math',
-    grade: 8,
-    title: 'Định lý Pytago (Tìm cạnh huyền)',
-    expression: 'c = √(a² + b²)',
-    description: 'Tam giác vuông với 2 cạnh góc vuông a, b',
-    inputs: [
-      { name: 'a', label: 'Cạnh góc vuông 1 (a)' },
-      { name: 'b', label: 'Cạnh góc vuông 2 (b)' }
-    ],
-    logic: (vals) => Math.sqrt(vals.a * vals.a + vals.b * vals.b)
-  },
-  {
-    id: 'm9_quad',
-    subject: 'math',
-    grade: 9,
-    title: 'Giải PT Bậc 2 (Tìm Delta)',
-    expression: 'Δ = b² - 4ac',
-    description: 'Tính biệt thức Delta cho pt: ax² + bx + c = 0',
-    inputs: [
-      { name: 'a', label: 'Hệ số a' },
-      { name: 'b', label: 'Hệ số b' },
-      { name: 'c', label: 'Hệ số c' }
-    ],
-    logic: (vals) => vals.b * vals.b - 4 * vals.a * vals.c
-  },
-  {
-    id: 'm9_circle_area',
-    subject: 'math',
-    grade: 9,
-    title: 'Diện tích hình tròn',
-    expression: 'S = πr²',
-    description: 'r là bán kính',
-    inputs: [
-      { name: 'r', label: 'Bán kính (r)' }
-    ],
-    logic: (vals) => Math.PI * vals.r * vals.r
-  },
-
-  // --- VẬT LÝ ---
-  {
-    id: 'p6_density',
-    subject: 'physics',
-    grade: 6,
-    title: 'Khối lượng riêng',
-    expression: 'D = m / V',
-    description: 'm: khối lượng (kg), V: thể tích (m³)',
-    inputs: [
-      { name: 'm', label: 'Khối lượng (m)' },
-      { name: 'V', label: 'Thể tích (V)' }
-    ],
-    logic: (vals) => vals.V !== 0 ? vals.m / vals.V : 'Lỗi chia cho 0'
-  },
-  {
-    id: 'p8_force',
-    subject: 'physics',
-    grade: 8,
-    title: 'Áp suất chất rắn',
-    expression: 'p = F / S',
-    description: 'F: áp lực (N), S: diện tích bị ép (m²)',
-    inputs: [
-      { name: 'F', label: 'Áp lực (F)' },
-      { name: 'S', label: 'Diện tích (S)' }
-    ],
-    logic: (vals) => vals.S !== 0 ? vals.F / vals.S : 'Lỗi chia cho 0'
-  },
-  {
-    id: 'p8_work',
-    subject: 'physics',
-    grade: 8,
-    title: 'Công cơ học',
-    expression: 'A = F × s',
-    description: 'F: lực tác dụng (N), s: quãng đường (m)',
-    inputs: [
-      { name: 'F', label: 'Lực (F)' },
-      { name: 's', label: 'Quãng đường (s)' }
-    ],
-    logic: (vals) => vals.F * vals.s
-  },
-  {
-    id: 'p9_ohm',
-    subject: 'physics',
-    grade: 9,
-    title: 'Định luật Ohm (Tìm CĐDĐ)',
-    expression: 'I = U / R',
-    description: 'U: Hiệu điện thế (V), R: Điện trở (Ω)',
-    inputs: [
-      { name: 'U', label: 'Hiệu điện thế (U)' },
-      { name: 'R', label: 'Điện trở (R)' }
-    ],
-    logic: (vals) => vals.R !== 0 ? vals.U / vals.R : 'Lỗi chia cho 0'
-  },
-  {
-    id: 'p9_power',
-    subject: 'physics',
-    grade: 9,
-    title: 'Công suất điện',
-    expression: 'P = U × I',
-    description: 'U: Hiệu điện thế (V), I: Cường độ dòng điện (A)',
-    inputs: [
-      { name: 'U', label: 'Hiệu điện thế (U)' },
-      { name: 'I', label: 'Cường độ dòng điện (I)' }
-    ],
-    logic: (vals) => vals.U * vals.I
-  },
-];
+// --- XỬ LÝ DỮ LIỆU ---
+// File JSON chỉ chứa text, không chứa hàm thực thi.
+// Ta cần map dữ liệu từ JSON với các hàm logic tương ứng dựa trên 'id'.
+const FORMULAS = formulasData.map((formula) => ({
+  ...formula,
+  // Gắn hàm tính toán tương ứng từ file logic, nếu không có thì trả về hàm dummy
+  logic: formulaLogic[formula.id] || (() => 'Chưa cập nhật logic')
+}));
 
 const FormulaUtility = () => {
   // State quản lý UI
@@ -209,19 +68,24 @@ const FormulaUtility = () => {
       return;
     }
 
-    // Gọi hàm logic đã định nghĩa trong data
-    const res = selectedFormula.logic(numericValues);
-    
-    // Format kết quả (nếu là số thì làm tròn 2 số lẻ)
-    if (typeof res === 'number') {
-      setResult(Number.isInteger(res) ? res : res.toFixed(2));
-    } else {
-      setResult(res);
+    // Gọi hàm logic đã được map ở trên
+    try {
+        const res = selectedFormula.logic(numericValues);
+        
+        // Format kết quả (nếu là số thì làm tròn 2 số lẻ)
+        if (typeof res === 'number') {
+          setResult(Number.isInteger(res) ? res : res.toFixed(2));
+        } else {
+          setResult(res);
+        }
+    } catch (error) {
+        setResult("Lỗi tính toán");
+        console.error(error);
     }
   };
 
   return (
-    <div className="p-4 md:p-8 max-w-5xl mx-auto bg-gray-50 min-h-screen font-sans text-gray-800">
+    <div className="font-sans text-gray-800">
       <h1 className="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-8">
         Tra Cứu & Tính Toán Công Thức
       </h1>
@@ -292,7 +156,7 @@ const FormulaUtility = () => {
 
       {/* --- PHẦN 2: BỘ LỌC (TABS & GRADE) --- */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4 border-gray-200 pb-4">
-            {/* Tab Môn học - Style Segmented */}
+            {/* Tab Môn học */}
             <div className="bg-gray-200/60 p-1.5 rounded-xl inline-flex shadow-inner">
                 {['math', 'physics'].map((tab) => (
                 <button
@@ -309,7 +173,7 @@ const FormulaUtility = () => {
                 ))}
             </div>
 
-            {/* Filter Lớp - Giữ nguyên logic nhưng làm đẹp UI */}
+            {/* Filter Lớp */}
             <div className="flex flex-col gap-2">
                 <span className="text-xs font-bold text-gray-400 uppercase tracking-wider text-right">
                     Chọn khối lớp

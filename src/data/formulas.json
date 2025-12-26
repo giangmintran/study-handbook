@@ -1,0 +1,242 @@
+[
+  {
+    "id": "m6_rect_area",
+    "subject": "math",
+    "grade": 6,
+    "title": "Diện tích hình chữ nhật",
+    "expression": "S = a × b",
+    "description": "a: chiều dài, b: chiều rộng",
+    "inputs": [
+      { "name": "a", "label": "Chiều dài (a)" },
+      { "name": "b", "label": "Chiều rộng (b)" }
+    ]
+  },
+  {
+    "id": "m6_rect_peri",
+    "subject": "math",
+    "grade": 6,
+    "title": "Chu vi hình chữ nhật",
+    "expression": "P = (a + b) × 2",
+    "description": "a: chiều dài, b: chiều rộng",
+    "inputs": [
+      { "name": "a", "label": "Chiều dài (a)" },
+      { "name": "b", "label": "Chiều rộng (b)" }
+    ]
+  },
+  {
+    "id": "m7_power",
+    "subject": "math",
+    "grade": 7,
+    "title": "Lũy thừa",
+    "expression": "aⁿ",
+    "description": "Tính a mũ n",
+    "inputs": [
+      { "name": "a", "label": "Cơ số (a)" },
+      { "name": "n", "label": "Số mũ (n)" }
+    ]
+  },
+  {
+    "id": "m8_pythagoras",
+    "subject": "math",
+    "grade": 8,
+    "title": "Định lý Pytago (Tìm cạnh huyền)",
+    "expression": "c = √(a² + b²)",
+    "description": "Tam giác vuông với 2 cạnh góc vuông a, b",
+    "inputs": [
+      { "name": "a", "label": "Cạnh góc vuông 1 (a)" },
+      { "name": "b", "label": "Cạnh góc vuông 2 (b)" }
+    ]
+  },
+  {
+    "id": "m9_quad",
+    "subject": "math",
+    "grade": 9,
+    "title": "Giải PT Bậc 2 (Tìm Delta)",
+    "expression": "Δ = b² - 4ac",
+    "description": "Tính biệt thức Delta cho pt: ax² + bx + c = 0",
+    "inputs": [
+      { "name": "a", "label": "Hệ số a" },
+      { "name": "b", "label": "Hệ số b" },
+      { "name": "c", "label": "Hệ số c" }
+    ]
+  },
+  {
+    "id": "m9_circle_area",
+    "subject": "math",
+    "grade": 9,
+    "title": "Diện tích hình tròn",
+    "expression": "S = πr²",
+    "description": "r là bán kính",
+    "inputs": [
+      { "name": "r", "label": "Bán kính (r)" }
+    ]
+  },
+  {
+    "id": "p6_density",
+    "subject": "physics",
+    "grade": 6,
+    "title": "Khối lượng riêng",
+    "expression": "D = m / V",
+    "description": "m: khối lượng (kg), V: thể tích (m³)",
+    "inputs": [
+      { "name": "m", "label": "Khối lượng (m)" },
+      { "name": "V", "label": "Thể tích (V)" }
+    ]
+  },
+  {
+    "id": "p8_force",
+    "subject": "physics",
+    "grade": 8,
+    "title": "Áp suất chất rắn",
+    "expression": "p = F / S",
+    "description": "F: áp lực (N), S: diện tích bị ép (m²)",
+    "inputs": [
+      { "name": "F", "label": "Áp lực (F)" },
+      { "name": "S", "label": "Diện tích (S)" }
+    ]
+  },
+  {
+    "id": "p8_work",
+    "subject": "physics",
+    "grade": 8,
+    "title": "Công cơ học",
+    "expression": "A = F × s",
+    "description": "F: lực tác dụng (N), s: quãng đường (m)",
+    "inputs": [
+      { "name": "F", "label": "Lực (F)" },
+      { "name": "s", "label": "Quãng đường (s)" }
+    ]
+  },
+  {
+    "id": "p9_ohm",
+    "subject": "physics",
+    "grade": 9,
+    "title": "Định luật Ohm (Tìm CĐDĐ)",
+    "expression": "I = U / R",
+    "description": "U: Hiệu điện thế (V), R: Điện trở (Ω)",
+    "inputs": [
+      { "name": "U", "label": "Hiệu điện thế (U)" },
+      { "name": "R", "label": "Điện trở (R)" }
+    ]
+  },
+  {
+    "id": "p9_power",
+    "subject": "physics",
+    "grade": 9,
+    "title": "Công suất điện",
+    "expression": "P = U × I",
+    "description": "U: Hiệu điện thế (V), I: Cường độ dòng điện (A)",
+    "inputs": [
+      { "name": "U", "label": "Hiệu điện thế (U)" },
+      { "name": "I", "label": "Cường độ dòng điện (I)" }
+    ]
+  },
+  {
+    "id": "m6_square_area",
+    "subject": "math",
+    "grade": 6,
+    "title": "Diện tích hình vuông",
+    "expression": "S = a × a",
+    "description": "a: độ dài cạnh",
+    "inputs": [
+      { "name": "a", "label": "Cạnh (a)" }
+    ]
+  },
+  {
+    "id": "m6_triangle_area",
+    "subject": "math",
+    "grade": 6,
+    "title": "Diện tích hình tam giác",
+    "expression": "S = (a × h) / 2",
+    "description": "a: độ dài đáy, h: chiều cao tương ứng",
+    "inputs": [
+      { "name": "a", "label": "Đáy (a)" },
+      { "name": "h", "label": "Chiều cao (h)" }
+    ]
+  },
+  {
+    "id": "p6_weight",
+    "subject": "physics",
+    "grade": 6,
+    "title": "Trọng lượng",
+    "expression": "P = 10 × m",
+    "description": "P: trọng lượng (N), m: khối lượng (kg)",
+    "inputs": [
+      { "name": "m", "label": "Khối lượng (m)" }
+    ]
+  },
+  {
+    "id": "m8_identity_sum",
+    "subject": "math",
+    "grade": 8,
+    "title": "Bình phương một tổng",
+    "expression": "(a + b)² = a² + 2ab + b²",
+    "description": "Hằng đẳng thức đáng nhớ số 1",
+    "inputs": [
+      { "name": "a", "label": "Số thứ nhất (a)" },
+      { "name": "b", "label": "Số thứ hai (b)" }
+    ]
+  },
+  {
+    "id": "p8_heat",
+    "subject": "physics",
+    "grade": 8,
+    "title": "Nhiệt lượng thu vào/tỏa ra",
+    "expression": "Q = m × c × Δt",
+    "description": "m: kg, c: nhiệt dung riêng (J/kg.K), Δt: độ tăng/giảm nhiệt độ",
+    "inputs": [
+      { "name": "m", "label": "Khối lượng (m)" },
+      { "name": "c", "label": "Nhiệt dung riêng (c)" },
+      { "name": "dt", "label": "Độ chênh lệch nhiệt độ (Δt)" }
+    ]
+  },
+  {
+    "id": "m9_sphere_vol",
+    "subject": "math",
+    "grade": 9,
+    "title": "Thể tích hình cầu",
+    "expression": "V = (4/3) × π × r³",
+    "description": "r: bán kính hình cầu",
+    "inputs": [
+      { "name": "r", "label": "Bán kính (r)" }
+    ]
+  },
+  {
+    "id": "m9_cylinder_vol",
+    "subject": "math",
+    "grade": 9,
+    "title": "Thể tích hình trụ",
+    "expression": "V = π × r² × h",
+    "description": "r: bán kính đáy, h: chiều cao",
+    "inputs": [
+      { "name": "r", "label": "Bán kính đáy (r)" },
+      { "name": "h", "label": "Chiều cao (h)" }
+    ]
+  },
+  {
+    "id": "p9_joule_lenz",
+    "subject": "physics",
+    "grade": 9,
+    "title": "Định luật Joule – Lenz",
+    "expression": "Q = I² × R × t",
+    "description": "Q: Nhiệt lượng (J), I: Ampe, R: Ôm, t: giây",
+    "inputs": [
+      { "name": "I", "label": "Cường độ dòng điện (I)" },
+      { "name": "R", "label": "Điện trở (R)" },
+      { "name": "t", "label": "Thời gian (t)" }
+    ]
+  },
+  {
+    "id": "p9_transformer",
+    "subject": "physics",
+    "grade": 9,
+    "title": "Máy biến thế (Tìm U2)",
+    "expression": "U2 = (n2 / n1) × U1",
+    "description": "U: Hiệu điện thế, n: Số vòng dây (1: sơ cấp, 2: thứ cấp)",
+    "inputs": [
+      { "name": "U1", "label": "HĐT cuộn sơ cấp (U1)" },
+      { "name": "n1", "label": "Số vòng sơ cấp (n1)" },
+      { "name": "n2", "label": "Số vòng thứ cấp (n2)" }
+    ]
+  }
+]
