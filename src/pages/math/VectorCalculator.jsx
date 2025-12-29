@@ -80,7 +80,7 @@ const VectorCalculator = () => {
 
         /* SỬA: Đổi .header -> .vc-header */
         .vc-header { text-align: center; margin-bottom: 0.5rem; }
-        .vc-header h1 { margin: 0; font-weight: 800; color: rgb(67, 56, 202); letter-spacing: -0.025em; font-size: 2.5rem; }
+        .vc-header h1 { margin: 0; font-weight: 800; color: rgb(67, 56, 202); letter-spacing: -0.025em; font-size: 2rem; }
         .vc-header p { margin: 0.5rem 0 0; color: var(--text-muted); font-size: 0.95rem; }
 
         .vc-input-section {

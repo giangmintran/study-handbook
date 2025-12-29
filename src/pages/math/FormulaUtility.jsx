@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import formulasData from '../../data/formulas.json'; 
-import { formulaLogic } from '../../logic/formulaLogic';
+import formulasData from '../../data/mathFomulas.json'; 
+import { mathLogic } from '../../logic/mathLogic';
 
 // --- XỬ LÝ DỮ LIỆU ---
 const FORMULAS = formulasData.map((formula) => ({
   ...formula,
-  logic: formulaLogic[formula.id] || (() => 'Chưa cập nhật logic')
+  logic: mathLogic[formula.id] || (() => 'Chưa cập nhật logic')
 }));
 
 const FormulaUtility = () => {

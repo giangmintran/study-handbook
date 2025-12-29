@@ -10,10 +10,10 @@ import EquationSolver from './pages/math/EquationSolver';
 import FormulaUtility from './pages/math/FormulaUtility';
 import VectorCalculator from './pages/math/VectorCalculator';
 import FormulaPhysic from './pages/physic/FormulaPhysic';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 // Các placeholder cũ
-const Vector = () => <div>Tính năng Tính Vector đang phát triển...</div>;
-
 function App() {
   return (
     <BrowserRouter>
@@ -32,7 +32,9 @@ function App() {
           <Route path="english/dictionary" element={<Dictionary />} />
           {/* Vật lý */}
           <Route path="physics/formula" element={<FormulaPhysic />} />
-
+          {/* Footer */}
+          <Route path="privacy" element={<PrivacyPolicy />} />
+          <Route path="terms" element={<TermsOfService />} />
         </Route>
       </Routes>
     </BrowserRouter>
