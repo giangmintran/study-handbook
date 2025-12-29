@@ -8,7 +8,7 @@ const FORMULAS = formulasData.map((formula) => ({
   logic: formulaLogic[formula.id] || (() => 'Chưa cập nhật logic')
 }));
 
-const FormulaUtility = () => {
+const FormulaPhysic = () => {
   const [activeGrade, setActiveGrade] = useState('all'); 
   const [selectedFormula, setSelectedFormula] = useState(null);
   const [inputValues, setInputValues] = useState({});
@@ -17,7 +17,7 @@ const FormulaUtility = () => {
   // Lọc danh sách
   const filteredFormulas = useMemo(() => {
     return FORMULAS.filter(f => {
-      const matchSubject = f.subject === 'math'; 
+      const matchSubject = f.subject === 'physics'; 
       const matchGrade = activeGrade === 'all' || f.grade === parseInt(activeGrade);
       return matchSubject && matchGrade;
     });
@@ -69,7 +69,7 @@ const FormulaUtility = () => {
       
       {/* RESPONSIVE 2: Tiêu đề nhỏ lại một chút trên mobile (text-2xl) */}
       <h1 className="text-2xl md:text-4xl font-bold text-center text-indigo-700 my-6 md:mb-8">
-        Tra Cứu & Tính Toán Công Thức Toán Học
+        Tra Cứu & Tính Toán Công Thức Vật lý
       </h1>
 
       {/* --- PHẦN 1: MÁY TÍNH ĐỘNG --- */}
@@ -203,7 +203,7 @@ const FormulaUtility = () => {
         
         {filteredFormulas.length === 0 && (
           <div className="col-span-full text-center py-10 text-gray-400">
-            Không tìm thấy công thức Toán học nào cho khối lớp này.
+            Không tìm thấy công thức vật lý nào cho khối lớp này.
           </div>
         )}
       </div>
@@ -211,4 +211,4 @@ const FormulaUtility = () => {
   );
 };
 
-export default FormulaUtility;
+export default FormulaPhysic;

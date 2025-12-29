@@ -8,9 +8,10 @@ import GraphPlotter from './pages/math/GraphPlotter';
 import Dictionary from './pages/english/Dictionary';
 import EquationSolver from './pages/math/EquationSolver';
 import FormulaUtility from './pages/math/FormulaUtility';
+import VectorCalculator from './pages/math/VectorCalculator';
+import FormulaPhysic from './pages/physic/FormulaPhysic';
 
 // Các placeholder cũ
-const Solver = () => <div>Tính năng Giải phương trình đang phát triển...</div>;
 const Vector = () => <div>Tính năng Tính Vector đang phát triển...</div>;
 
 function App() {
@@ -25,10 +26,12 @@ function App() {
           {/* Toán */}
           <Route path="math/solver" element={<EquationSolver />} />
           <Route path="math/graph" element={<GraphPlotter />} />
-          <Route path="math/vector" element={<Vector />} />
+          <Route path="math/vector" element={<VectorCalculator />} />
           <Route path="math/formula" element={<FormulaUtility />} />
           {/* Tiếng Anh */}
           <Route path="english/dictionary" element={<Dictionary />} />
+          {/* Vật lý */}
+          <Route path="physics/formula" element={<FormulaPhysic />} />
 
         </Route>
       </Routes>

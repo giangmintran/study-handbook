@@ -10,8 +10,18 @@ const GraphPlotter = () => {
   
   const [highlightedPoint, setHighlightedPoint] = useState(null);
   const activePointRef = useRef(null);
+  
+  // State để trigger render lại khi resize màn hình
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // --- THUẬT TOÁN TÌM NGHIỆM ---
+  // --- LẮNG NGHE SỰ KIỆN RESIZE ---
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // --- THUẬT TOÁN TÌM NGHIỆM (Giữ nguyên) ---
   const findPreciseRoots = (compiledExpr, compiledDerivative, range = [-20, 20]) => {
     let roots = [];
     const step = 0.5;
@@ -89,11 +99,17 @@ const GraphPlotter = () => {
       }
       setTableData(calculatedTableData);
 
+      // --- TÍNH TOÁN KÍCH THƯỚC ĐỒ THỊ RESPONSIVE ---
+      // Lấy chiều rộng thực tế của thẻ div chứa đồ thị
+      const containerWidth = rootEl.current ? rootEl.current.offsetWidth : 800;
+      // Nếu màn hình nhỏ (mobile), chiều cao đồ thị thấp hơn một chút cho vừa mắt
+      const containerHeight = windowWidth < 768 ? 400 : 600;
+
       // 3. VẼ ĐỒ THỊ
       functionPlot({
         target: rootEl.current,
-        width: 800,
-        height: 600,
+        width: containerWidth,  // Dùng chiều rộng động
+        height: containerHeight, // Dùng chiều cao động
         grid: true,
         xAxis: { domain: [-10, 10] },
         yAxis: { domain: [-10, 10] },
@@ -116,54 +132,34 @@ const GraphPlotter = () => {
           xLine: true,
           yLine: true,
           renderer: (x, y) => {
-            // 1. TĂNG NGƯỠNG BẮT DÍNH (QUAN TRỌNG)
-            // Tăng từ 0.5 lên 3 hoặc 5. Vì ta dùng thuật toán tìm điểm gần nhất (min distance),
-            // nên threshold lớn cũng không sợ bị bắt nhầm sang điểm ở xa hơn.
-            const SNAP_DISTANCE = 0.25; 
-
-            // 2. TỔNG HỢP TẤT CẢ CÁC ĐIỂM CẦN BẮT DÍNH VÀO MỘT DANH SÁCH
+            const SNAP_DISTANCE = 0.5; // Giảm nhẹ threshold trên mobile cho đỡ nhạy quá mức
+            
             const allCandidates = [];
-
-            // Thêm điểm cắt trục Oy
             if (calculatedIntercepts.yIntercept !== null) {
-              allCandidates.push({ 
-                x: 0, 
-                y: calculatedIntercepts.yIntercept, 
-                type: 'y', 
-                value: calculatedIntercepts.yIntercept 
-              });
+              allCandidates.push({ x: 0, y: calculatedIntercepts.yIntercept, type: 'y', value: calculatedIntercepts.yIntercept });
             }
-
-            // Thêm các điểm cắt trục Ox
             if (calculatedIntercepts.xIntercepts) {
               calculatedIntercepts.xIntercepts.forEach(root => {
                 allCandidates.push({ x: root, y: 0, type: 'x', value: root });
               });
             }
-
-            // Thêm các điểm trên bảng dữ liệu (nếu có)
             if (calculatedTableData) {
               calculatedTableData.forEach(p => {
                 allCandidates.push({ x: p.x, y: p.y, type: 'table', value: p.x });
               });
             }
 
-            // 3. THUẬT TOÁN TÌM ĐIỂM GẦN NHẤT (NEAREST NEIGHBOR)
             let closestPoint = null;
             let minDistance = Infinity;
 
             allCandidates.forEach(p => {
-              // Tính khoảng cách Euclid từ chuột (x,y) tới điểm (p.x, p.y)
               const dist = Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(y - p.y, 2));
-              
-              // Nếu khoảng cách nhỏ hơn ngưỡng VÀ nhỏ hơn khoảng cách tìm được trước đó
               if (dist <= SNAP_DISTANCE && dist < minDistance) {
                 minDistance = dist;
                 closestPoint = p;
               }
             });
 
-            // 4. CẬP NHẬT STATE (Giữ nguyên logic debounce của bạn)
             const isDifferent =
               (closestPoint === null && activePointRef.current !== null) ||
               (closestPoint !== null && activePointRef.current === null) ||
@@ -175,9 +171,6 @@ const GraphPlotter = () => {
               setHighlightedPoint(closestPoint);
             }
 
-            // 5. HIỂN THỊ TOOLTIP
-            // Nếu đang bắt dính vào điểm nào, hiển thị tọa độ điểm đó (để người dùng biết chính xác)
-            // Nếu không, hiển thị tọa độ chuột
             if (closestPoint) {
               return `  (${closestPoint.x.toFixed(3)}, ${closestPoint.y.toFixed(3)})`;
             }
@@ -188,7 +181,8 @@ const GraphPlotter = () => {
     } catch (e) {
       console.log("Lỗi:", e.message);
     }
-  }, [expression]);
+    // Thêm windowWidth vào dependency để vẽ lại khi resize
+  }, [expression, windowWidth]); 
 
   const isHighlighted = (type, value) => {
       if (!highlightedPoint) return false;
@@ -196,16 +190,22 @@ const GraphPlotter = () => {
   };
 
   return (
-    <div className="font-sans ">
-      <h2 className="text-2xl font-bold mb-6 text-blue-700">Đồ Thị Hàm Số & Giao Điểm</h2>
+    // Thêm padding cho mobile (p-4), giữ nguyên font sans
+    <div className="font-sans p-4 lg:p-0">
+      {/* Tiêu đề nhỏ hơn trên mobile (text-2xl), lớn trên desktop (text-4xl) */}
+      <h2 className="text-2xl lg:text-4xl font-bold mb-4 lg:mb-2 text-indigo-700 text-center lg:text-left">
+        Đồ Thị Hàm Số & Giao Điểm
+      </h2>
       
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* LEFT PANEL */}
+      {/* Flex column trên mobile, Flex row trên desktop */}
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        
+        {/* LEFT PANEL: Input & Data */}
         <div className="w-full lg:w-1/3 space-y-4">
           
-          {/* 1. INPUT VÀ HƯỚNG DẪN CHI TIẾT */}
+          {/* 1. INPUT */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">Hàm số f(x):</label>
+            <label className="block mb-1 font-semibold text-gray-700">Hàm số f(x):</label>
             <input 
               type="text" 
               value={expression}
@@ -214,10 +214,10 @@ const GraphPlotter = () => {
               placeholder="Nhập hàm số (vd: x^2 - 4)..."
             />
             
-            {/* HƯỚNG DẪN CHI TIẾT */}
             <div className="bg-blue-50 p-3 rounded-lg border border-blue-100 text-sm text-gray-700">
                 <p className="font-semibold text-blue-800 mb-2 text-xs uppercase tracking-wide">Cú pháp hỗ trợ:</p>
-                <div className="grid grid-cols-2 gap-x-2 gap-y-1">
+                {/* Grid 2 cột trên mobile, giữ nguyên layout */}
+                <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-xs sm:text-sm">
                     <div className="flex justify-between">
                         <span>Mũ:</span> <code className="bg-white px-1 rounded border text-pink-600">^</code>
                     </div>
@@ -225,7 +225,7 @@ const GraphPlotter = () => {
                         <span>Căn bậc 2:</span> <code className="bg-white px-1 rounded border text-pink-600">sqrt(x)</code>
                     </div>
                     <div className="flex justify-between">
-                        <span>Lượng giác:</span> <code className="bg-white px-1 rounded border text-pink-600">sin, cos, tan</code>
+                        <span>Lượng giác:</span> <code className="bg-white px-1 rounded border text-pink-600">sin, cos</code>
                     </div>
                     <div className="flex justify-between">
                         <span>Logarit:</span> <code className="bg-white px-1 rounded border text-pink-600">log(x)</code>
@@ -240,21 +240,23 @@ const GraphPlotter = () => {
             </div>
           </div>
           
+          {/* Container cho 2 bảng dữ liệu: Trên mobile xếp dọc, Desktop xếp dọc (giữ nguyên flow) */}
+          
           {/* 2. CARD THÔNG TIN GIAO ĐIỂM */}
-          <div className="bg-white p-5 rounded-lg border shadow-sm">
+          <div className="bg-white p-4 lg:p-5 rounded-lg border shadow-sm">
             <h3 className="font-bold text-gray-800 border-b pb-2 mb-3">Thông tin giao điểm</h3>
-            <div className="space-y-3">
+            <div className="space-y-3 text-sm lg:text-base">
               <div className={`flex items-start p-2 rounded transition-all duration-300 ${
                   isHighlighted('y', intercepts.yIntercept) ? 'bg-yellow-100 ring-1 ring-yellow-400' : ''
               }`}>
-                <span className="w-24 font-medium text-purple-600">Cắt Oy:</span>
-                <span className="font-mono text-gray-900">
+                <span className="w-20 lg:w-24 font-medium text-purple-600">Cắt Oy:</span>
+                <span className="font-mono text-gray-900 break-all">
                   {intercepts.yIntercept !== null ? `(0, ${intercepts.yIntercept.toFixed(4)})` : '---'}
                 </span>
               </div>
 
               <div className="flex items-start p-2">
-                <span className="w-24 font-medium text-red-600 pt-1">Cắt Ox:</span>
+                <span className="w-20 lg:w-24 font-medium text-red-600 pt-1">Cắt Ox:</span>
                 <div className="flex-1">
                   {intercepts.xIntercepts.length > 0 ? (
                     <ul className="space-y-1">
@@ -273,14 +275,14 @@ const GraphPlotter = () => {
           </div>
 
           {/* 3. CARD BẢNG DẪN NHẬP */}
-          <div className="bg-white p-5 rounded-lg border shadow-sm">
-             <h3 className="font-bold text-gray-800 border-b pb-2 mb-3 flex justify-between items-center">
+          <div className="bg-white p-4 lg:p-5 rounded-lg border shadow-sm">
+             <h3 className="font-bold text-gray-800 border-b pb-2 mb-3 flex justify-between items-center text-sm lg:text-base">
                 Bảng giá trị
-                <span className="text-xs font-normal text-gray-400">(x: -5 đến 5)</span>
+                <span className="text-xs font-normal text-gray-400 ml-2">(x: -5 đến 5)</span>
              </h3>
-             <div className="overflow-x-auto max-h-60 overflow-y-auto">
+             <div className="overflow-x-auto max-h-48 lg:max-h-60 overflow-y-auto">
                 <table className="min-w-full text-sm text-left">
-                    <thead className="bg-gray-100 text-gray-600 font-medium">
+                    <thead className="bg-gray-100 text-gray-600 font-medium sticky top-0">
                         <tr>
                             <th className="px-4 py-2 border-b">x</th>
                             <th className="px-4 py-2 border-b">y = f(x)</th>
@@ -308,9 +310,13 @@ const GraphPlotter = () => {
         </div>
 
         {/* RIGHT PANEL: GRAPH */}
-        <div className="flex-1">
-           <div ref={rootEl} className="rounded-xl overflow-hidden shadow-lg border bg-white"></div>
-           <p className="text-center text-sm text-gray-400 mt-2">Di chuột vào các điểm trên đồ thị</p>
+        {/* w-full để nó chiếm hết chiều ngang trên mobile */}
+        <div className="w-full flex-1">
+           {/* Thêm key để React ép vẽ lại div này nếu cần thiết, nhưng logic chính nằm ở useEffect */}
+           <div ref={rootEl} className="rounded-xl overflow-hidden shadow-lg border bg-white w-full"></div>
+           <p className="text-center text-xs lg:text-sm text-gray-400 mt-2">
+              {windowWidth < 768 ? "Chạm vào đồ thị để xem tọa độ" : "Di chuột vào các điểm trên đồ thị"}
+           </p>
         </div>
       </div>
     </div>
