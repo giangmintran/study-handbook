@@ -46,10 +46,8 @@ const VectorCalculator = () => {
   const formatVec = (v) => `( ${v.x.toFixed(2)}, ${v.y.toFixed(2)}, ${v.z.toFixed(2)} )`;
 
   return (
-    /* Thêm class bao ngoài 'vc-scope' để cô lập CSS */
     <div className="vc-scope">
       <style>{`
-        /* SỬA: Thay :root bằng class bao ngoài để biến không bị lọt ra ngoài */
         .vc-scope {
           --primary: #6366f1;
           --card-bg: #ffffff;
@@ -57,19 +55,15 @@ const VectorCalculator = () => {
           --text-muted: #6b7280;
           --color-a: #3b82f6;
           --color-b: #f43f5e;
-          
-          /* Áp dụng font và background chỉ cho vùng này thay vì body */
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           background-color: var(--bg-color);
           color: var(--text-main);
-          padding: 1rem; /* Tạo khoảng cách nếu nhúng vào trang khác */
-          border-radius: 8px; /* Bo nhẹ nếu cần */
+          padding: 1rem;
+          border-radius: 8px;
         }
 
-        /* SỬA: Thay * bằng selector cụ thể bên trong scope */
         .vc-scope * { box-sizing: border-box; }
 
-        /* SỬA: Đổi tên class .container -> .vc-container để tránh trùng bootstrap/tailwind */
         .vc-container {
           max-width: 1000px;
           margin: 0 auto;
@@ -78,7 +72,6 @@ const VectorCalculator = () => {
           gap: 2rem;
         }
 
-        /* SỬA: Đổi .header -> .vc-header */
         .vc-header { text-align: center; margin-bottom: 0.5rem; }
         .vc-header h1 { margin: 0; font-weight: 800; color: rgb(67, 56, 202); letter-spacing: -0.025em; font-size: 2rem; }
         .vc-header p { margin: 0.5rem 0 0; color: var(--text-muted); font-size: 0.95rem; }
@@ -89,7 +82,6 @@ const VectorCalculator = () => {
           gap: 1.5rem;
         }
 
-        /* SỬA: .vector-card -> .vc-card */
         .vc-card {
           background: var(--card-bg);
           border-radius: 16px;
@@ -150,8 +142,10 @@ const VectorCalculator = () => {
 
         .vc-result-grid {
           display: grid;
+          /* Mặc định desktop: grid tự động */
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: 1rem;
+          grid-auto-flow: dense; /* Giúp lấp đầy khoảng trống */
         }
 
         .vc-res-card {
@@ -173,16 +167,34 @@ const VectorCalculator = () => {
         .vc-highlight-card {
           background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
           color: white;
+          /* SỬA: Chuyển grid-row vào CSS class */
+          grid-row: span 2; 
         }
         .vc-highlight-card .vc-res-title, .vc-highlight-card .vc-res-formula { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.1); }
         .vc-highlight-card .vc-res-value { color: white; font-size: 2rem; text-align: center; padding: 0.5rem 0; }
 
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 600px) {
-          .vc-container { padding: 0.75rem; gap: 1.5rem; }
+          .vc-container { padding: 0.5rem; gap: 1rem; }
+          .vc-header h1 { font-size: 1.5rem; }
+          
           .vc-input-section { grid-template-columns: 1fr; gap: 1rem; }
+          
+          /* SỬA: Ép lưới kết quả về 1 cột trên mobile */
+          .vc-result-grid {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+          }
+
+          /* SỬA: Tắt tính năng chiếm 2 dòng của thẻ Highlight trên mobile */
+          .vc-highlight-card {
+            grid-row: auto;
+          }
+
           .vc-card { padding: 1rem; }
           .vc-coord-grid { gap: 0.5rem; }
           .vc-coord-input { font-size: 1rem; padding: 0.6rem 0.25rem; }
+          
           .vc-res-value { font-size: 1rem; }
           .vc-highlight-card .vc-res-value { font-size: 1.75rem; }
         }
@@ -260,7 +272,8 @@ const VectorCalculator = () => {
             <div>
               <span className="vc-section-title">Độ lớn & Góc</span>
               <div className="vc-result-grid">
-                 <div className="vc-res-card vc-highlight-card" style={{ gridRow: 'span 2' }}>
+                 {/* SỬA: Đã bỏ style={{gridRow: 'span 2'}} ở đây để CSS xử lý */}
+                 <div className="vc-res-card vc-highlight-card">
                   <div className="vc-res-header">
                     <span className="vc-res-title">Góc giữa 2 vector</span>
                     <span className="vc-res-formula">θ</span>
