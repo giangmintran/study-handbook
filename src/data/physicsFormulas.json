@@ -1,0 +1,112 @@
+[
+  {
+    "id": "p6_density",
+    "subject": "physics",
+    "grade": 6,
+    "title": "Khối lượng riêng",
+    "expression": "D = m / V",
+    "description": "m: khối lượng (kg), V: thể tích (m³)",
+    "inputs": [
+      { "name": "m", "label": "Khối lượng (m)" },
+      { "name": "V", "label": "Thể tích (V)" }
+    ]
+  },
+  {
+    "id": "p6_weight",
+    "subject": "physics",
+    "grade": 6,
+    "title": "Trọng lượng",
+    "expression": "P = 10 × m",
+    "description": "P: trọng lượng (N), m: khối lượng (kg)",
+    "inputs": [
+      { "name": "m", "label": "Khối lượng (m)" }
+    ]
+  },
+  {
+    "id": "p8_force",
+    "subject": "physics",
+    "grade": 8,
+    "title": "Áp suất chất rắn",
+    "expression": "p = F / S",
+    "description": "F: áp lực (N), S: diện tích bị ép (m²)",
+    "inputs": [
+      { "name": "F", "label": "Áp lực (F)" },
+      { "name": "S", "label": "Diện tích (S)" }
+    ]
+  },
+  {
+    "id": "p8_work",
+    "subject": "physics",
+    "grade": 8,
+    "title": "Công cơ học",
+    "expression": "A = F × s",
+    "description": "F: lực tác dụng (N), s: quãng đường (m)",
+    "inputs": [
+      { "name": "F", "label": "Lực (F)" },
+      { "name": "s", "label": "Quãng đường (s)" }
+    ]
+  },
+  {
+    "id": "p8_heat",
+    "subject": "physics",
+    "grade": 8,
+    "title": "Nhiệt lượng thu vào/tỏa ra",
+    "expression": "Q = m × c × Δt",
+    "description": "m: kg, c: nhiệt dung riêng (J/kg.K), Δt: độ tăng/giảm nhiệt độ",
+    "inputs": [
+      { "name": "m", "label": "Khối lượng (m)" },
+      { "name": "c", "label": "Nhiệt dung riêng (c)" },
+      { "name": "dt", "label": "Độ chênh lệch nhiệt độ (Δt)" }
+    ]
+  },
+  {
+    "id": "p9_ohm",
+    "subject": "physics",
+    "grade": 9,
+    "title": "Định luật Ohm (Tìm CĐDĐ)",
+    "expression": "I = U / R",
+    "description": "U: Hiệu điện thế (V), R: Điện trở (Ω)",
+    "inputs": [
+      { "name": "U", "label": "Hiệu điện thế (U)" },
+      { "name": "R", "label": "Điện trở (R)" }
+    ]
+  },
+  {
+    "id": "p9_power",
+    "subject": "physics",
+    "grade": 9,
+    "title": "Công suất điện",
+    "expression": "P = U × I",
+    "description": "U: Hiệu điện thế (V), I: Cường độ dòng điện (A)",
+    "inputs": [
+      { "name": "U", "label": "Hiệu điện thế (U)" },
+      { "name": "I", "label": "Cường độ dòng điện (I)" }
+    ]
+  },
+  {
+    "id": "p9_joule_lenz",
+    "subject": "physics",
+    "grade": 9,
+    "title": "Định luật Joule – Lenz",
+    "expression": "Q = I² × R × t",
+    "description": "Q: Nhiệt lượng (J), I: Ampe, R: Ôm, t: giây",
+    "inputs": [
+      { "name": "I", "label": "Cường độ dòng điện (I)" },
+      { "name": "R", "label": "Điện trở (R)" },
+      { "name": "t", "label": "Thời gian (t)" }
+    ]
+  },
+  {
+    "id": "p9_transformer",
+    "subject": "physics",
+    "grade": 9,
+    "title": "Máy biến thế (Tìm U2)",
+    "expression": "U2 = (n2 / n1) × U1",
+    "description": "U: Hiệu điện thế, n: Số vòng dây (1: sơ cấp, 2: thứ cấp)",
+    "inputs": [
+      { "name": "U1", "label": "HĐT cuộn sơ cấp (U1)" },
+      { "name": "n1", "label": "Số vòng sơ cấp (n1)" },
+      { "name": "n2", "label": "Số vòng thứ cấp (n2)" }
+    ]
+  }
+]
