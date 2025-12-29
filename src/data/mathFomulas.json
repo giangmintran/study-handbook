@@ -1,0 +1,398 @@
+[
+    {
+        "id": "m6_rect_area",
+        "subject": "math",
+        "grade": 6,
+        "title": "Diện tích hình chữ nhật",
+        "expression": "S = a × b",
+        "description": "a: chiều dài, b: chiều rộng",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Chiều dài (a)"
+            },
+            {
+                "name": "b",
+                "label": "Chiều rộng (b)"
+            }
+        ]
+    },
+    {
+        "id": "m6_rect_peri",
+        "subject": "math",
+        "grade": 6,
+        "title": "Chu vi hình chữ nhật",
+        "expression": "P = (a + b) × 2",
+        "description": "a: chiều dài, b: chiều rộng",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Chiều dài (a)"
+            },
+            {
+                "name": "b",
+                "label": "Chiều rộng (b)"
+            }
+        ]
+    },
+    {
+        "id": "m6_square_area",
+        "subject": "math",
+        "grade": 6,
+        "title": "Diện tích hình vuông",
+        "expression": "S = a × a",
+        "description": "a: độ dài cạnh",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Cạnh (a)"
+            }
+        ]
+    },
+    {
+        "id": "m6_triangle_area",
+        "subject": "math",
+        "grade": 6,
+        "title": "Diện tích hình tam giác",
+        "expression": "S = (a × h) / 2",
+        "description": "a: độ dài đáy, h: chiều cao tương ứng",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Đáy (a)"
+            },
+            {
+                "name": "h",
+                "label": "Chiều cao (h)"
+            }
+        ]
+    },
+    {
+        "id": "m7_power",
+        "subject": "math",
+        "grade": 7,
+        "title": "Lũy thừa",
+        "expression": "aⁿ",
+        "description": "Tính a mũ n",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Cơ số (a)"
+            },
+            {
+                "name": "n",
+                "label": "Số mũ (n)"
+            }
+        ]
+    },
+    {
+        "id": "m8_pythagoras",
+        "subject": "math",
+        "grade": 8,
+        "title": "Định lý Pytago (Tìm cạnh huyền)",
+        "expression": "c = √(a² + b²)",
+        "description": "Tam giác vuông với 2 cạnh góc vuông a, b",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Cạnh góc vuông 1 (a)"
+            },
+            {
+                "name": "b",
+                "label": "Cạnh góc vuông 2 (b)"
+            }
+        ]
+    },
+    {
+        "id": "m8_identity_sum",
+        "subject": "math",
+        "grade": 8,
+        "title": "Bình phương một tổng",
+        "expression": "(a + b)² = a² + 2ab + b²",
+        "description": "Hằng đẳng thức đáng nhớ số 1",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Số thứ nhất (a)"
+            },
+            {
+                "name": "b",
+                "label": "Số thứ hai (b)"
+            }
+        ]
+    },
+    {
+        "id": "m9_quad",
+        "subject": "math",
+        "grade": 9,
+        "title": "Giải PT Bậc 2 (Tìm Delta)",
+        "expression": "Δ = b² - 4ac",
+        "description": "Tính biệt thức Delta cho pt: ax² + bx + c = 0",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Hệ số a"
+            },
+            {
+                "name": "b",
+                "label": "Hệ số b"
+            },
+            {
+                "name": "c",
+                "label": "Hệ số c"
+            }
+        ]
+    },
+    {
+        "id": "m9_circle_area",
+        "subject": "math",
+        "grade": 9,
+        "title": "Diện tích hình tròn",
+        "expression": "S = πr²",
+        "description": "r là bán kính",
+        "inputs": [
+            {
+                "name": "r",
+                "label": "Bán kính (r)"
+            }
+        ]
+    },
+    {
+        "id": "m9_sphere_vol",
+        "subject": "math",
+        "grade": 9,
+        "title": "Thể tích hình cầu",
+        "expression": "V = (4/3) × π × r³",
+        "description": "r: bán kính hình cầu",
+        "inputs": [
+            {
+                "name": "r",
+                "label": "Bán kính (r)"
+            }
+        ]
+    },
+    {
+        "id": "m9_cylinder_vol",
+        "subject": "math",
+        "grade": 9,
+        "title": "Thể tích hình trụ",
+        "expression": "V = π × r² × h",
+        "description": "r: bán kính đáy, h: chiều cao",
+        "inputs": [
+            {
+                "name": "r",
+                "label": "Bán kính đáy (r)"
+            },
+            {
+                "name": "h",
+                "label": "Chiều cao (h)"
+            }
+        ]
+    },
+    {
+        "id": "m6_trap_area",
+        "subject": "math",
+        "grade": 6,
+        "title": "Diện tích hình thang",
+        "expression": "S = (a + b) × h / 2",
+        "description": "a, b: hai đáy; h: chiều cao",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Đáy lớn (a)"
+            },
+            {
+                "name": "b",
+                "label": "Đáy nhỏ (b)"
+            },
+            {
+                "name": "h",
+                "label": "Chiều cao (h)"
+            }
+        ]
+    },
+    {
+        "id": "m6_parallelogram_area",
+        "subject": "math",
+        "grade": 6,
+        "title": "Diện tích hình bình hành",
+        "expression": "S = a × h",
+        "description": "a: đáy; h: chiều cao",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Đáy (a)"
+            },
+            {
+                "name": "h",
+                "label": "Chiều cao (h)"
+            }
+        ]
+    },
+    {
+        "id": "m7_root",
+        "subject": "math",
+        "grade": 7,
+        "title": "Căn bậc hai",
+        "expression": "√a",
+        "description": "Tính căn bậc hai của a (a ≥ 0)",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Số a"
+            }
+        ]
+    },
+    {
+        "id": "m7_ratio",
+        "subject": "math",
+        "grade": 7,
+        "title": "Tỉ lệ thức",
+        "expression": "a / b = c / d",
+        "description": "Giải tỉ lệ thức",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "a"
+            },
+            {
+                "name": "b",
+                "label": "b"
+            },
+            {
+                "name": "c",
+                "label": "c"
+            },
+            {
+                "name": "d",
+                "label": "d"
+            }
+        ]
+    },
+    {
+        "id": "m8_identity_diff",
+        "subject": "math",
+        "grade": 8,
+        "title": "Hiệu hai bình phương",
+        "expression": "a² - b² = (a - b)(a + b)",
+        "description": "Hằng đẳng thức đáng nhớ số 2",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Số thứ nhất (a)"
+            },
+            {
+                "name": "b",
+                "label": "Số thứ hai (b)"
+            }
+        ]
+    },
+    {
+        "id": "m8_identity_diff",
+        "subject": "math",
+        "grade": 8,
+        "title": "Bình phương hiệu",
+        "expression": "(a - b)² = a² - 2ab + b²",
+        "description": "Hằng đẳng thức đáng nhớ số 3",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Số thứ nhất (a)"
+            },
+            {
+                "name": "b",
+                "label": "Số thứ hai (b)"
+            }
+        ]
+    },
+    {
+        "id": "m9_circle_circumference",
+        "subject": "math",
+        "grade": 9,
+        "title": "Chu vi hình tròn",
+        "expression": "C = 2πr",
+        "description": "r là bán kính",
+        "inputs": [
+            {
+                "name": "r",
+                "label": "Bán kính (r)"
+            }
+        ]
+    },
+    {
+        "id": "m9_cone_vol",
+        "subject": "math",
+        "grade": 9,
+        "title": "Thể tích hình nón",
+        "expression": "V = (1/3) × π × r² × h",
+        "description": "r: bán kính đáy, h: chiều cao",
+        "inputs": [
+            {
+                "name": "r",
+                "label": "Bán kính đáy (r)"
+            },
+            {
+                "name": "h",
+                "label": "Chiều cao (h)"
+            }
+        ]
+    },
+    {
+        "id": "m9_prism_vol",
+        "subject": "math",
+        "grade": 9,
+        "title": "Thể tích hình lăng trụ",
+        "expression": "V = B × h",
+        "description": "B: diện tích mặt đáy, h: chiều cao",
+        "inputs": [
+            {
+                "name": "B",
+                "label": "Diện tích mặt đáy (B)"
+            },
+            {
+                "name": "h",
+                "label": "Chiều cao (h)"
+            }
+        ]
+    },
+    {
+        "id": "m9_linear_eq",
+        "subject": "math",
+        "grade": 9,
+        "title": "Giải PT bậc nhất",
+        "expression": "ax + b = 0 → x = -b / a",
+        "description": "a ≠ 0",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Hệ số a"
+            },
+            {
+                "name": "b",
+                "label": "Hệ số b"
+            }
+        ]
+    },
+    {
+        "id": "m9_quad_root",
+        "subject": "math",
+        "grade": 9,
+        "title": "Nghiệm PT bậc 2",
+        "expression": "x = (-b ± √Δ) / 2a",
+        "description": "Δ ≥ 0",
+        "inputs": [
+            {
+                "name": "a",
+                "label": "Hệ số a"
+            },
+            {
+                "name": "b",
+                "label": "Hệ số b"
+            },
+            {
+                "name": "delta",
+                "label": "Delta (Δ)"
+            }
+        ]
+    }
+]
