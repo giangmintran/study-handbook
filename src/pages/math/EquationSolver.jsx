@@ -167,7 +167,6 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    backgroundColor: '#f0f2f5',
     padding: '40px 20px',
     fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
   },
@@ -180,7 +179,7 @@ const styles = {
     marginBottom: '30px',
   },
   header: {
-    color: '#1a1a1a',
+    color: '#4f46e5',
     margin: '0 0 10px 0',
     fontSize: '2.5rem',
     fontWeight: '700',
